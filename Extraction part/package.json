@@ -1,0 +1,17 @@
+{
+  "name": "blockasset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index2.js"
+  },
+  "dependencies": {
+    "pdf-text": "*",
+    "formidable": "*",
+    "express": "4.13.3",
+    "multer": "1.1.0"
+  },
+  "author": "karthi",
+  "license": "ISC"
+}
