@@ -1,0 +1,87 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.example.blockasset
+
+concept ab_address{
+ 
+  o String doorno
+  o String street_name
+  o String landmark
+  o String city
+  o String state
+  o String zipcode regex=/[0-9]{6}/
+ 
+ } 
+
+concept asset_timestamps {
+
+  -->person owner 
+  o DateTime datetime
+
+}
+
+asset property identified by propId {
+  
+  o String propId
+  o String propname
+  o String surroundedby
+  o Double price
+  o Double squarefoot
+  o String bearing
+  o ab_address prop_address
+  o DateTime reg_datetime
+  --> person owner
+  o asset_timestamps[] previous_owners 
+ 
+ }
+
+ participant person identified by adhaarno {
+ 
+  o String adhaarno
+  o String name
+  o String father_name
+  o ab_address address
+  o Double ph_no
+  o String email_id regex=/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
+   
+ }
+
+participant registrator identified by registrator_id {
+ 
+  o String registrator_id
+  o String name
+  o Double ph_no
+  o String email_id regex=/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
+  o String registor_office_id
+  o String district 
+
+ }
+
+ transaction register{
+     
+   -->person buyer
+   -->person seller
+   -->property asset
+   o DateTime datetime   
+ 
+ }
+
+ transaction search{
+ 
+   o String asset_id optional
+   o String owner_id optional
+   -->registrator reg_person
+   
+ }
